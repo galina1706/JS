@@ -26,7 +26,7 @@ var myObj = {first: 'First Name', last: 'Last Name'};
  */
 
 // decimal2
-var myNum = 5;
+var decima12 = 5;
 var decimal2 = myNum.toFixed(2);
 
 console.log(decimal2);
