@@ -17,6 +17,7 @@ var myArr = [1, 2, 3, 4, 5];
 // ім'я змінної: myObj, значення: first: 'First Name', last: 'Last Name'
 var myObj = {first: 'First Name', last: 'Last Name'};
 
+
 /*
  * #2
  *
