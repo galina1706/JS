@@ -1,46 +1,96 @@
-console.log('JS #1. Домашнє завдання. Основи JavaScript: Працюємо зі змінними, типами даних');
+console.log('#21. JavaScript homework: читацький клуб')
 
 /*
- * #1
- *
- * Створіть змінні зі значеннями.
+ * Загальні умови:
+ * - завдання виконуються послідовно, одне під одним, у цьому самому файлі;
+ * - результат кожного завдання виводьте в консоль через console.log;
+ * - цикли пишуться тільки всередині функцій.
  */
-
-// ім'я змінної: myNum, значення: 10
-var myNum = 10;
-// ім'я змінної: myStr, значення: 'some string'
-var myStr = 'some string';
-// ім'я змінної: myBool, значення: true
-var myBool = true;
-// ім'я змінної: myArr, значення: 1, 2, 3, 4, 5
-var myArr = [1, 2, 3, 4, 5];
-// ім'я змінної: myObj, значення: first: 'First Name', last: 'Last Name'
-var myObj = {first: 'First Name', last: 'Last Name'};
-
 
 /*
- * #2
+ * Вихідні дані (скопіюйте собі у файл і далі працюйте з ними):
  *
- * Відформатуйте ціле число, збережене у змінній myNum, щоб отримати результат з 2 знаками після коми.
- * Результат збережіть у змінній decimal2.
- *
+ * const memberObj = {
+ *   name: 'Olena',
+ *   yearOfBirth: 1998,
+ *   city: 'Львів',
+ *   booksPerMonth: 3,
+ *   favoriteGenre: 'фентезі',
+ * }
  */
-
-// decimal2
-var decima12 = 5;
-var decimal2 = myNum.toFixed(2);
-
-console.log(decimal2);
 
 /*
- * #3
+ * Завдання 1. Функція, параметри за замовчуванням, перевірка на undefined
  *
- * Створіть змінну myBigInt і запишіть в неї число 123n (BigInt).
- * Потім збільште його на 1 і запишіть у ту саму змінну.
+ * Напишіть функцію memberCard(name, yearOfBirth, favoriteGenre, city), де параметр city
+ * має значення за замовчуванням 'Київ'. Функція ПОВЕРТАЄ рядок, зібраний за такими правилами:
+ * - name не передано          - частина про ім'я у рядок не потрапляє,
+ *                               інакше 'My name is Olena.'
+ * - yearOfBirth не передано   - частина про вік у рядок не потрапляє, інакше вік рахується
+ *                               від поточного року через new Date().getFullYear() -
+ *                               'I am 28 years old.'
+ * - favoriteGenre не передано - частина про жанр у рядок не потрапляє,
+ *                               інакше 'I read фентезі.'
+ * - місто у рядку є завжди    - 'I live in Київ.'
+ *
+ * Перевірка на відсутній аргумент робиться через typeof, console.log усередині функції
+ * не використовується.
+ *
+ * Перевірте роботу функції на трьох викликах: з усіма чотирма аргументами; без міста;
+ * без жанру, але з містом (undefined на місці жанру).
  */
 
-// myBigInt
-var myBigInt = 123n;
-myBigInt = myBigInt + 1n;
 
-console.log(myBigInt);
+const memberObj = {
+    name: 'Olena',
+    yearOfBirth: 1998,
+    city: 'Львів',
+    booksPerMonth: 3,
+    favoriteGenre: 'фентезі',
+    }
+    console.log(memberObj)
+
+function memberCard(name, yearOfBirth, favoriteGenre, city = 'Київ'){
+    const currentYear = new Date().getFullYear();
+
+    return [
+        typeof name !== 'undefined' ? `My name is ${name}.` : null,
+        typeof yearOfBirth !== 'undefined' ? `I am ${currentYear - yearOfBirth} years old.` : null,
+        typeof favoriteGenre !== 'undefined' ? `I read ${favoriteGenre}.` : null,
+        `I live in ${city}.`
+    ]
+        .filter(Boolean)
+        .join(' ');
+}
+
+
+console.log(memberCard(memberObj.name, memberObj.yearOfBirth, memberObj.favoriteGenre, memberObj.city));
+
+console.log(memberCard(memberObj.name, memberObj.yearOfBirth, memberObj.favoriteGenre));
+
+console.log(memberCard(memberObj.name, memberObj.yearOfBirth, undefined, memberObj.city));
+
+/*
+ * Завдання 2. Функція і цикл for ... in
+ *
+ * Напишіть функцію describeMember(memberObj), яка приймає об'єкт, перебирає його
+ * через for ... in і ПОВЕРТАЄ один рядок у форматі
+ * 'name: Olena; yearOfBirth: 1998; city: Львів; booksPerMonth: 3; favoriteGenre: фентезі;'
+ *
+ * Викличте функцію для memberObj і виведіть результат.
+ * Вкладені об'єкти в цьому завданні не розглядаються.
+ */
+
+function describeMember(obj) {
+    let resultString = '';
+
+    for (const key in obj) {
+        if (Object.hasOwn(obj, key)) {
+            resultString += `${key}: ${obj[key]}; `;
+        }
+    }
+
+    return resultString;
+}
+
+console.log(describeMember(memberObj));
