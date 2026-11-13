@@ -15,9 +15,6 @@ console.log('#6. JavaScript homework example file')
  */
 
 class CalorieCalculator {
-  constructor() {
-    this.products = new Map();
-  }
 
   addProduct(productName, calories) {
     this.products.set(productName, calories);
@@ -36,7 +33,8 @@ class CalorieCalculator {
 }
 
 // Демонстрація використання
-const calorieCalculator = new CalorieCalculator()
+const calorieCalculator = new CalorieCalculator();
+calorieCalculator.products = new Map();
 calorieCalculator.addProduct('Apple', 52)
 calorieCalculator.addProduct('Banana', 89)
 
@@ -61,9 +59,6 @@ console.log(calorieCalculator.getProductCalories('Apple')) // Product not found
  */
 
 class UniqueUsernames {
-  constructor() {
-    this.usernames = new Set();
-  }
 
   addUser(username) {
     this.usernames.add(username);
@@ -80,6 +75,7 @@ class UniqueUsernames {
 
 // Демонстрація використання
 const uniqueUsernames = new UniqueUsernames()
+uniqueUsernames.usernames = new Set();
 uniqueUsernames.addUser('john_doe')
 uniqueUsernames.addUser('jane_doe')
 uniqueUsernames.addUser('john_doe') // Ця дія не змінить набір, оскільки 'john_doe' вже існує
